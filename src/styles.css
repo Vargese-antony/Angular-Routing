@@ -1,13 +1,9 @@
-li {
-    font-size: large;
+a { 
+    cursor: pointer; 
 }
 
 div.panel-heading {
    font-size: x-large; 
-}
-
-li { 
-    cursor: pointer; 
 }
 
 /* Fade transition */

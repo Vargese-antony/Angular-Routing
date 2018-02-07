@@ -6,8 +6,8 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component({
-    templateUrl: './app/products/product-edit.component.html',
-    styleUrls: ['./app/products/product-edit.component.css']
+    templateUrl: './product-edit.component.html',
+    styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent {
     pageTitle: string = 'Product Edit';

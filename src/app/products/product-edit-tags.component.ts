@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IProduct } from './product';
 
 @Component({
-    templateUrl: './app/products/product-edit-tags.component.html'
+    templateUrl: './product-edit-tags.component.html'
 })
 export class ProductEditTagsComponent implements OnInit {
     errorMessage: string;

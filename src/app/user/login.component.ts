@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from './auth.service';
 
 @Component({
-    templateUrl: './app/user/login.component.html'
+    templateUrl: './login.component.html'
 })
 export class LoginComponent {
     errorMessage: string;
