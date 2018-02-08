@@ -1,33 +1,35 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="navbar-brand">{{pageTitle}}</div>
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Product List</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Add Product</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav navbar-right">
-            <li class="nav-item" *ngIf="authService.isLoggedIn()">
-                <a class="nav-link">Welcome {{ authService.currentUser.userName }}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">Show Messages</a>
-            </li>
-            <li class="nav-item" *ngIf="!authService.isLoggedIn()">
-                <a class="nav-link">Log In</a>
-            </li>
-            <li class="nav-item" *ngIf="authService.isLoggedIn()">
-                <a class="nav-link" (click)="logOut()">Log Out</a>
-            </li>
-        </ul>
+<div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand">{{pageTitle}}</a>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a [routerLink]="['/welcome']">Home</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/products']">Product List</a>
+                </li>
+                <li>
+                    <a>Add Product</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li *ngIf="authService.isLoggedIn()">
+                    <a>Welcome {{ authService.currentUser.userName }}</a>
+                </li>
+                <li>
+                    <a>Show Messages</a>
+                </li>
+                <li *ngIf="!authService.isLoggedIn()">
+                    <a>Log In</a>
+                </li>
+                <li *ngIf="authService.isLoggedIn()">
+                    <a (click)="logOut()">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <router-outlet></router-outlet>
     </div>
-</nav>
-<div class="container">
-    <app-home></app-home>
 </div>
