@@ -10,7 +10,7 @@
                     <a [routerLink]="['/products']">Product List</a>
                 </li>
                 <li>
-                    <a>Add Product</a>
+                    <a [routerLink]="['/products', 0, 'edit']">Add Product</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -21,7 +21,7 @@
                     <a>Show Messages</a>
                 </li>
                 <li *ngIf="!authService.isLoggedIn()">
-                    <a>Log In</a>
+                    <a [routerLink]="['/login']">Log In</a>
                 </li>
                 <li *ngIf="authService.isLoggedIn()">
                     <a (click)="logOut()">Log Out</a>

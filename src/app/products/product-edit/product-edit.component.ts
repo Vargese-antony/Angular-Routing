@@ -1,22 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { MessageService } from '../messages/message.service';
+import { MessageService } from '../../messages/message.service';
 
-import { IProduct } from './product';
-import { ProductService } from './product.service';
+import { IProduct } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
     templateUrl: './product-edit.component.html',
     styleUrls: ['./product-edit.component.css']
 })
-export class ProductEditComponent {
+export class ProductEditComponent implements OnInit{
     pageTitle: string = 'Product Edit';
     errorMessage: string;
 
     product: IProduct;
 
-    constructor(private productService: ProductService,
-                private messageService: MessageService) { }
+    constructor(
+        private productService: ProductService,
+        private messageService: MessageService,
+        private activatedRoute: ActivatedRoute,
+        private router: Router
+    ) { }
+    
+    ngOnInit() {
+        // Using route parameter and call the service to get the data
+
+        //let id = +this.activatedRoute.snapshot.params['id'];
+        /*this.activatedRoute.params.subscribe( params => {
+            let id = +params['id'];
+            this.getProduct(id);
+        });*/
+
+        // Using resolver
+
+        // 1. Snapshot 
+
+        //this.onProductRetrieved(this.activatedRoute.snapshot.data['product']);
+
+        // 2. Using observable to change the data when the resolver fetches again
+
+        this.activatedRoute.data.subscribe( data => {
+            this.onProductRetrieved(data['product']);
+        })
+    }
 
     getProduct(id: number): void {
         this.productService.getProduct(id)
@@ -69,5 +96,6 @@ export class ProductEditComponent {
         }
 
         // Navigate back to the product list
+        this.router.navigate(['/products']);
     }
 }

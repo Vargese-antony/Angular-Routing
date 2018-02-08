@@ -72,7 +72,8 @@ export class ProductService {
 
     private extractData(response: Response) {
         let body = response.json();
-        return body.data || {};
+        //console.log('extractData', body);
+        return body || {};
     }
 
     private handleError(error: Response): Observable<any> {

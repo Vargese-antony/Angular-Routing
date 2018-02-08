@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { IProduct } from './product';
+import { IProduct } from '../product';
 
 @Component({
     templateUrl: './product-edit-info.component.html'
