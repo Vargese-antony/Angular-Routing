@@ -13,18 +13,30 @@ import { ProductEditInfoComponent } from './product-edit/product-edit-info.compo
 import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
 
 const routes: Route[] = [
- { path: 'products', component: ProductListComponent},
- { path: 'products/:id', component: ProductDetailComponent, resolve: {product: ProductResolveService}},
  { 
-   path: 'products/:id/edit',
-   component: ProductEditComponent,
-   resolve: {product: ProductResolveService},
+   path: 'products',
    children: [
-     { path: '', redirectTo: 'info', pathMatch:'full'},
-     { path: 'info', component: ProductEditInfoComponent},
-     { path: 'tags', component: ProductEditTagsComponent}
+    {
+      path: '',
+      component: ProductListComponent
+    },
+    { 
+      path: ':id', 
+      component: ProductDetailComponent, 
+      resolve: {product: ProductResolveService}
+    },
+    { 
+      path: ':id/edit',
+      component: ProductEditComponent,
+      resolve: {product: ProductResolveService},
+      children: [
+        { path: '', redirectTo: 'info', pathMatch:'full'},
+        { path: 'info', component: ProductEditInfoComponent},
+        { path: 'tags', component: ProductEditTagsComponent}
+      ]
+    }
    ]
-  }
+ }
 ];
 
 @NgModule({
