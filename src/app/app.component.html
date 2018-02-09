@@ -18,9 +18,12 @@
                 <li *ngIf="authService.isLoggedIn()">
                     <a>Welcome {{ authService.currentUser.userName }}</a>
                 </li>
-                <li>
-                    <a>Show Messages</a>
+                <li *ngIf="!messageService.isDisplayed">
+                    <a (click)="onShowMessage()">Show Messages</a>
                 </li>
+                <li *ngIf="messageService.isDisplayed">
+                        <a (click)="onHideMessage()">Hide Messages</a>
+                    </li>
                 <li *ngIf="!authService.isLoggedIn()">
                     <a [routerLink]="['/login']">Log In</a>
                 </li>
@@ -31,6 +34,13 @@
         </div>
     </nav>
     <div class="container">
-        <router-outlet></router-outlet>
+        <div class="row">
+            <div class="col-md-10">
+                <router-outlet></router-outlet>
+            </div>
+            <div class="col-md-2">
+                <router-outlet name="popup"></router-outlet>
+            </div>
+        </div>
     </div>
 </div>

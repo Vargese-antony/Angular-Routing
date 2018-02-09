@@ -5,6 +5,7 @@ import { LoginComponent } from './login.component';
 import { AuthService } from './auth.service';
 
 import { SharedModule } from '../shared/shared.module';
+import { AuthGuardService } from './auth-guard.service';
 
 const routes : Route[] = [
   {path:'login', component:LoginComponent}
@@ -19,7 +20,8 @@ const routes : Route[] = [
     LoginComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService
   ]
 })
 export class UserModule { }

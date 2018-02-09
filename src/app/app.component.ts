@@ -9,6 +9,7 @@ import {
 } from '@angular/router';
 
 import { AuthService } from './user/auth.service';
+import { MessageService } from './messages/message.service';
 
 @Component({
     selector: 'pm-app',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit{
 
     constructor(
         private authService: AuthService,
+        private messageService: MessageService,
         private router: Router
     ) { }
 
@@ -45,5 +47,13 @@ export class AppComponent implements OnInit{
         console.log('Log out');
         // Navigate to the welcome page
         this.router.navigateByUrl('/welcome');
+    }
+    onHideMessage() {
+        this.router.navigate([{outlets: {popup: null}}]);
+        this.messageService.isDisplayed = false;
+    }
+    onShowMessage() {
+        this.router.navigate([{outlets: {popup: ['messages']}}]);
+        this.messageService.isDisplayed = true;
     }
 }

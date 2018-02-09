@@ -11,10 +11,13 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductResolveService } from './product-resolve.service';
 import { ProductEditInfoComponent } from './product-edit/product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
+import { AuthGuardService } from '../user/auth-guard.service';
+import { ProductEditGuardService } from './product-edit-guard.service';
 
 const routes: Route[] = [
  { 
    path: 'products',
+   canActivate: [AuthGuardService],
    children: [
     {
       path: '',
@@ -29,6 +32,7 @@ const routes: Route[] = [
       path: ':id/edit',
       component: ProductEditComponent,
       resolve: {product: ProductResolveService},
+      canDeactivate: [ProductEditGuardService],
       children: [
         { path: '', redirectTo: 'info', pathMatch:'full'},
         { path: 'info', component: ProductEditInfoComponent},
@@ -54,7 +58,8 @@ const routes: Route[] = [
   ],
   providers: [
     ProductService,
-    ProductResolveService
+    ProductResolveService,
+    ProductEditGuardService
   ]
 })
 export class ProductModule {}
