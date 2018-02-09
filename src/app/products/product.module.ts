@@ -9,11 +9,22 @@ import { ProductService } from './product.service';
 
 import { SharedModule } from '../shared/shared.module';
 import { ProductResolveService } from './product-resolve.service';
+import { ProductEditInfoComponent } from './product-edit/product-edit-info.component';
+import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
 
 const routes: Route[] = [
  { path: 'products', component: ProductListComponent},
  { path: 'products/:id', component: ProductDetailComponent, resolve: {product: ProductResolveService}},
- { path: 'products/:id/edit', component: ProductEditComponent, resolve: {product: ProductResolveService}}
+ { 
+   path: 'products/:id/edit',
+   component: ProductEditComponent,
+   resolve: {product: ProductResolveService},
+   children: [
+     { path: '', redirectTo: 'info', pathMatch:'full'},
+     { path: 'info', component: ProductEditInfoComponent},
+     { path: 'tags', component: ProductEditTagsComponent}
+   ]
+  }
 ];
 
 @NgModule({
@@ -25,6 +36,8 @@ const routes: Route[] = [
     ProductListComponent,
     ProductDetailComponent,
     ProductEditComponent,
+    ProductEditInfoComponent,
+    ProductEditTagsComponent,
     ProductFilterPipe
   ],
   providers: [
