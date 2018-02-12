@@ -11,36 +11,29 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductResolveService } from './product-resolve.service';
 import { ProductEditInfoComponent } from './product-edit/product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
-import { AuthGuardService } from '../user/auth-guard.service';
 import { ProductEditGuardService } from './product-edit-guard.service';
 
 const routes: Route[] = [
- { 
-   path: 'products',
-   canActivate: [AuthGuardService],
-   children: [
-    {
-      path: '',
-      component: ProductListComponent
-    },
-    { 
-      path: ':id', 
-      component: ProductDetailComponent, 
-      resolve: {product: ProductResolveService}
-    },
-    { 
-      path: ':id/edit',
-      component: ProductEditComponent,
-      resolve: {product: ProductResolveService},
-      canDeactivate: [ProductEditGuardService],
-      children: [
-        { path: '', redirectTo: 'info', pathMatch:'full'},
-        { path: 'info', component: ProductEditInfoComponent},
-        { path: 'tags', component: ProductEditTagsComponent}
-      ]
-    }
-   ]
- }
+  {
+    path: '',
+    component: ProductListComponent
+  },
+  { 
+    path: ':id', 
+    component: ProductDetailComponent, 
+    resolve: {product: ProductResolveService}
+  },
+  { 
+    path: ':id/edit',
+    component: ProductEditComponent,
+    resolve: {product: ProductResolveService},
+    canDeactivate: [ProductEditGuardService],
+    children: [
+      { path: '', redirectTo: 'info', pathMatch:'full'},
+      { path: 'info', component: ProductEditInfoComponent},
+      { path: 'tags', component: ProductEditTagsComponent}
+    ]
+  }
 ];
 
 @NgModule({
